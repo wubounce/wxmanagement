@@ -1,0 +1,101 @@
+
+<view class='container'>
+  <view class='block'>
+    <view class='item'>
+      <view class='item-title'>创建日期</view>
+      <view class='item-con flex'>
+        <picker class='picker' mode="date" value="{{startDate}}" placeholder="开始日期" bindchange="startDateChange">
+          <view class="weui-input">{{startDate}}</view>
+          <view class='logo'>
+            <image src="../image/select_date.png" class="img"></image>
+          </view>
+        </picker>
+        <view class='line'></view>
+        <picker class='picker' mode="date" value="{{endDate}}" placeholder="结束日期" bindchange="endDateChange">
+          <view class="weui-input">{{endDate}}</view>
+          <view class='logo'>
+            <image src="../image/select_date.png" class="img"></image>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class='item'>
+      <view class='item-title'>快捷筛选</view>
+      <view class='item-con flex'>
+        <view wx:for="{{days}}" wx:key="{{index}}" data-index="{{index}}" data-data="{{item.data}}" class="badge {{current===index?'blue':''}}" bindtap="chooseDay">{{item.day}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='block' hover-class="currentClick">
+    <view class='item inline'>
+      <view class='item-name'>车牌号</view>
+      <view class='item-con'>
+        <view class="weui-cell__bd">
+            <view data-type="1" bindtap="goCar" style="{{license?'color:black':''}}" class="weui-select placeholder">{{license?license:'请选择车牌号'}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='block' hover-class="currentClick">
+    <view class='item inline'>
+      <view class='item-name'>司机姓名</view>
+      <view class='item-con'>
+        <view class="weui-cell__bd">
+            <view data-type="1" bindtap="goDriver" style="{{driver?'color:black':''}}" class="weui-select placeholder">{{driver?driver:'请选择司机姓名'}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='block' hover-class="currentClick">
+    <view class='item inline'>
+      <view class='item-name'>任务状态</view>
+      <view class='item-con'>
+        <view class="weui-cell__bd  weui-select wayStatus">
+          <picker bindchange="bindPickerChange" range-key="label" value="{{value}}" range="{{statusList}}">
+            <view class="picker" style="{{statusLabel?'color: black':''}}">{{statusLabel?statusLabel:'请选择运输状态'}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='block' hover-class="currentClick">
+    <view class='item inline'>
+      <view class='item-name'>出发基地</view>
+      <view class='item-con'>
+        <view class="weui-cell__bd">
+          <view style="{{startBase?'color: black':''}}" data-type="2" bindtap="goStart" class="weui-select placeholder">{{startBase?startBase:'请选择出发基地'}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+ <view class='block' hover-class="currentClick">
+    <view class='item inline'>
+      <view class='item-name'>到达基地</view>
+      <view class='item-con'>
+        <view class="weui-cell__bd">
+          <view style="{{endBase?'color: black':''}}" data-type="2" bindtap="goEnd" class="weui-select placeholder">{{endBase?endBase:'请选择到达基地'}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='block' hover-class="currentClick">
+      <view class='item inline'>
+        <view class='item-name'>调度单号</view>
+        <view class='item-con'>
+          <view class="weui-cell__bd">
+            <view style="{{wayBillNum?'color: black':''}}" data-type="2" bindtap="goWaybill" class="weui-select placeholder">{{wayBillNum?wayBillNum:'请选择调度单号'}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+  <view class="addNav">
+      <button hover-class="navigator-hover" class="weui-btn check-btn" type="primary" bindtap="search">确定</button>
+    </view>
+</view>

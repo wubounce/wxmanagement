@@ -1,0 +1,56 @@
+{
+  "pages": [
+    
+    
+    
+    "pages/index/index",
+    "pages/login/login",  
+    "pages/userinfor/userinfor",
+    "pages/changeSuccess/changeSuccess",
+    "pages/createDispatch/createDispatch",
+    "pages/dispatch_success/dispatch_success",
+    "pages/empty_success/empty_success",
+    
+    "pages/searchDetection/searchDetection",
+    "pages/changeStatus/changeStatus",
+    "pages/waySearch/waySearch",
+
+    "pages/detail/detail",
+
+    "pages/confirmPay/confirmPay",
+
+    "pages/searchDriver/searchDriver",
+    "pages/searchWayBill/searchWayBill",
+
+    "pages/searchBase/searchBase",
+
+    "pages/canUse/canUse",
+    "pages/supplier/supplier",
+    "pages/supplierT/supplierT",
+    "pages/searchSite/searchSite",
+    "pages/searchLicense/searchLicense",
+    "pages/docReciewDetail/docReciewDetail",
+    "pages/documentReview/documentReview",
+    
+    "pages/emptyDispatch/emptyDispatch",
+    "pages/carRepair/carRepair",
+    "pages/logs/logs",
+    "pages/borrowMoney/borrowMoney",
+    "pages/borrowDetail/borrowDetail",
+    "pages/payDetail/payDetail",
+    "pages/onwayRepair/onwayRepair",
+    "pages/driverLeave/driverLeave",
+    
+    "pages/carRepair_success/carRepair_success",
+    "pages/dispatchDetail/dispatchDetail",
+    
+    "pages/changePwd/changePwd"
+    
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#3E85FF",
+    "navigationBarTitleText": "博宇管理",
+    "navigationBarTextStyle": "white"
+  }
+}

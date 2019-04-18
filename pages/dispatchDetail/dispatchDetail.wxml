@@ -1,0 +1,27 @@
+<view class="container">
+  <view class='header'>
+    <block wx:for="{{detail.taskDetails}}" wx:key="{{index}}">
+    <view class='mileage time'wx:if="{{item.mileage>0}}">{{item.mileage}}KM<view>----------</view></view>
+    <view>{{item.siteName}}<view class='time'>{{item.scheduleTime}}</view></view>
+    </block>
+  </view>
+  <view class="page__bd">
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__hd title">
+        <view class="weui-cell__bd">调度单号：{{detail.num}}</view>
+      </view>
+      <view class="weui-panel__hd title">
+        <view class="weui-cell__bd">任务时间：{{detail.planDepartureTime?detail.planDepartureTime:''}}</view>
+      </view>
+      <view class="weui-panel__hd title">
+        <view class="weui-cell__bd">线路名称：{{detail.routeName}}</view>
+      </view>
+      <view class="weui-panel__hd title">
+        <view class="weui-cell__bd">司机姓名：{{detail.driverName}}</view>
+      </view>
+      <view class="weui-panel__hd title">
+        <view class="weui-cell__bd">车牌号：{{detail.truckLicense}}</view>
+      </view>
+    </view>
+  </view>
+</view>

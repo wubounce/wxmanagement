@@ -1,0 +1,26 @@
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-search-bar">
+            <view class="weui-search-bar__form">
+                <view class="weui-search-bar__box">
+                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                    <input type="text" class="weui-search-bar__input" placeholder="搜索基地" value="{{base}}" bindinput="inputTyping"/>
+                    <view class="weui-icon-clear" wx:if="{{base.length > 0}}" bindtap="clearInput">
+                        <icon type="clear" size="14"></icon>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class='license' wx:if="{{baseList.length > 0}}">
+        <block wx:for-items="{{baseList}}" wx:key="{{index}}">
+          <view bindtap="getLicense" data-base="{{item.name}}" data-baseid="{{item.id}}" data-index="{{index}}"><text class="{{currentIndex==index?'current':''}}">{{item.name}}</text></view>
+        </block>
+        </view>
+        <view class="search-tip" wx:if="{{baseList.length > 0}}">
+          <text>温馨提示：不在列表的基地请输入基地名称搜索</text>
+        </view>
+        <view class="searchbar-result" wx:else>
+          <text>无基地信息</text>
+        </view> 
+    </view>
+</view>

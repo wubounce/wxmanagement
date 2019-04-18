@@ -1,0 +1,46 @@
+.weui-tab__panel {
+  padding-top:0; 
+}
+.createdDispatch {
+  margin-top:100px;
+  background:#3E85FF !important;
+  border-radius:25px;
+  width:90%;
+}
+.createdDispatch1 {
+  margin-top:30px;
+  background:#3E85FF !important;
+  border-radius:25px;
+  width:88%;
+}
+.phcolor{  
+    color: #999999;
+}
+.ontime {
+  display: flex;
+}
+.ondate {
+  padding-right: 10px;
+  border-right: none;
+}
+.grad {
+  color: #999999;
+}
+.blue {
+  color: #2292DD;
+}
+.fcTime {
+  padding: 10px 0;
+}
+.hourText {
+  position: absolute;
+  right: 12px;
+}
+.wayzz {
+  padding: 10px 0;
+  font-size: 14px;
+  color: #999;
+}
+.wayLabel {
+  padding-right: 10px;
+}

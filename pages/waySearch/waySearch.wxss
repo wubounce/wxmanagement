@@ -1,0 +1,135 @@
+/* pages/historySearch/historySearch.wxss */
+.flex{
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+}
+.block{
+    margin-bottom: 20rpx;
+    padding: 20rpx 30rpx;
+    padding-right: 0!important;
+    background-color: #fff;
+}
+.placeholder {
+  color: #808080;
+}
+.item{
+    font-size: 28rpx;
+    line-height: 60rpx;
+    margin-bottom: 20rpx;
+}
+.item.inline {
+    position: relative;
+    padding-left: 150rpx;
+    margin-bottom: 0;
+}
+.item.inline .item-name{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 130rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    line-height:72rpx;
+}
+.picker{
+    display: inline-block;
+    position: relative;
+    width: 310rpx;
+    height: 70rpx;
+    padding: 0 36rpx;
+    padding-right: 80rpx;
+    border: 1px solid #dcdcdc;
+    font-size: 28rpx;
+    line-height: 68rpx;
+    box-sizing: border-box;
+    border-radius: 35rpx;
+    color: #999;
+}
+.picker .logo{
+    position: absolute;
+    width: 34rpx;
+    height: 28rpx;
+    top: 20rpx;
+    right: 30rpx;
+    font-size: 0;
+}
+.picker .logo .img{
+    width: 100%;
+    height: 100%;
+    vertical-align: top;
+}
+.line{
+    width: 36rpx;
+    height: 0;
+    margin: 0 20rpx;
+    margin-top: 34rpx;
+    border-bottom: 1px solid #dcdcdc;
+}
+.badge{
+    display: inline-block;
+    width: 200rpx;
+    height: 60rpx;
+    margin: 0 15rpx;
+    font-size: 28rpx;
+    line-height: 60rpx;
+    text-align: center;
+    border-radius: 30rpx;
+    color: #666;
+    background-color: #f0f2f5;
+}
+.weui-select{
+  padding-left: 0!important;
+}
+.weui-cell__bd{
+    position: relative;
+}
+.weui-cell__bd .logo-clear{
+    position: absolute;
+    top: 12rpx;
+    right: 30rpx;
+    width: 36rpx;
+    height: 36rpx;
+    z-index: 999;
+}
+.weui-cell__bd .logo-clear .img{
+    width: 100%;
+    height: 100%;
+}
+.weui-input{
+    height: 60rpx;
+    min-height: 60rpx;
+    line-height: 60rpx;
+}
+.citySelect {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  width: 100%;
+}
+.addNav{
+  display: block;
+  width: 100%;
+  margin: 80rpx auto;
+  /* position: fixed;
+  bottom: 50rpx; */
+}
+.check-btn{
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 28rpx;
+  color: #fff;
+  background: #3982ff !important;
+  border-radius: 45rpx;
+  width: 630rpx;
+}
+.blue {
+  background: #3982ff;
+  color: #fff;
+}
+.wayStatus .picker {
+  border: none;
+  padding-left:0;
+}

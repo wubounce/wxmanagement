@@ -1,0 +1,107 @@
+<!--pages/detail/detail.wxml-->
+
+
+<view class='container'>
+    <view class='header'>
+        <view class='site'>
+            <view class='name'>{{detail.taskDetails[0].cityName}}</view>
+            <view class='time'>{{detail.taskDetails[0].arriveTime?detail.taskDetails[0].arriveTime:detail.taskDetails[0].scheduleTime}}</view>
+        </view>
+        <view class='mileage'>
+            <view class='name'>{{detail.mileage ? detail.mileage + 'KM' : '0KM'}}</view>
+            <image src="../image/right_arrow.png" class="line"></image>
+        </view>
+        <view class='site'>
+            <view class='name'>{{detail.taskDetails[detail.taskDetails.length-1].cityName}}</view>
+            <view class='time'>{{detail.taskDetails[detail.taskDetails.length-1].arriveTime?detail.taskDetails[detail.taskDetails.length-1].arriveTime:detail.taskDetails[detail.taskDetails.length-1].scheduleTime}}</view>
+        </view>
+    </view>
+    <view class='info-box'>
+        <view class='item' style="padding-top:20rpx">
+            <view class='item-name' style="top:20rpx">调度单号：</view>
+            <view class='item-con'>{{detail.num}}<text class="textStatus" style="{{'background:'+detail.background}}">{{detail.status}}</text></view>
+        </view>
+        <view class='item'>
+            <view class='item-name'>调度类型：</view>
+            <view class='item-con'>{{detail.dispatchType?'空载':'重载'}}</view>
+        </view>
+        <view class='item'>
+            <view class='item-name'>司机姓名：</view>
+            <view class='item-con'>{{detail.driverName}} （{{detail.truckLicense}}）</view>
+        </view>
+        <view class='item' style="padding-left:110rpx">
+            <view class='item-name'>基地：</view>
+            <view class='item-con' wx:if="{{detail.toBaseId === detail.initToBaseId}}"><text>{{detail.baseId}}</text><image src="../image/arrow.png" class="line"></image><text style="margin-left:10rpx">{{detail.toBaseId}}</text></view>
+            <view class='item-con' wx:else><text>{{detail.baseId}}</text><image src="../image/arrow.png" class="line"></image><text style="margin-left:10rpx">{{detail.toBaseId+' （'+detail.initToBaseId+'）'}}</text></view>
+        </view>
+        <view class='item'>
+            <view class='item-name'>完善时间：</view>
+            <view class='item-con'>{{detail.assembleTime?detail.assembleTime+'  (数量：'+detail.cargoAmount+'）':''}}</view>
+        </view>
+        <view class='item' style="padding-left:260rpx">
+            <view class='item-name'>是否允许创建空载：</view>
+            <view class='item-con'>{{detail.allowedDryrun?'允许':'不允许'}}</view>
+        </view>
+        <view class='item' style="padding-left:230rpx;">
+            <view class='item-name'>空载调度单号码：</view>
+            <view class='item-con'>{{detail.nextWaybillNum?detail.nextWaybillNum:''}}</view>
+        </view>
+    </view>
+
+    <view class='info-box'>
+        <view class='item' style="padding-left:206rpx">
+            <view class='item-name'>计划发车时间：</view>
+            <view class='item-con'>{{detail.planDepartureTime?detail.planDepartureTime:''}}</view>
+        </view>
+        <view class='item' style="padding-left:206rpx">
+            <view class='item-name'>计划到达时间：</view>
+            <view class='item-con'>{{detail.planArriveTime?detail.planArriveTime:''}}</view>
+        </view>
+        <view class='item'>
+            <view class='item-name'>下发时间：</view>
+            <view class='item-con'>{{detail.issueTime?detail.issueTime:''}}</view>
+        </view>
+        <view class='item'  style="padding-left:206rpx">
+            <view class='item-name'>实际发车时间：</view>
+            <view class='item-con'>{{detail.actualDepartureTime?detail.actualDepartureTime:''}}</view>
+        </view>
+        <view class='item'  style="padding-left:206rpx">
+            <view class='item-name'>实际到达时间：</view>
+            <view class='item-con'>{{detail.actualArriveTime?detail.actualArriveTime:''}}</view>
+        </view>
+        <view class='item' style="padding-left:206rpx">
+            <view class='item-name'>围栏出发时间：</view>
+            <view class='item-con'>{{detail.fenceDepartureTime?detail.fenceDepartureTime:''}}</view>
+        </view>
+        <view class='item' style="padding-left:206rpx">
+            <view class='item-name'>围栏到达时间：</view>
+            <view class='item-con'>{{detail.fenceArriveTime?detail.fenceArriveTime:''}}</view>
+        </view>
+    </view>
+
+    <view class='info-box'>
+        <view class='item'>
+            <view class='item-name'>创建时间：</view>
+            <view class='item-con'>{{detail.createTime}} （{{detail.createUser}}）</view>
+        </view>
+        <view class='item'>
+            <view class='item-name'>创建IP：</view>
+            <view class='item-con'>{{detail.createIp?detail.createIp+' （'+detail.createFrom+'）':''}}</view>
+        </view>
+        <view class='item'>
+            <view class='item-name'>修改时间：</view>
+            <view class='item-con'>{{detail.updateTime?detail.updateTime:''}} （{{detail.updateUser}}）</view>
+        </view>
+    </view>
+
+    <view class='info-box'>
+        <view class='item'>
+            <view class='item-name'>运单号码：</view>
+            <view class='item-con' wx:for="{{orderList}}" wx:key="{{index}}">{{item}}</view>
+        </view>
+        <view class='item'>
+            <view class='item-name'>车架号码：</view>
+            <view wx:for="{{vinList}}" class='item-con'  wx:key="{{index}}">{{item}}</view>
+        </view>
+    </view>
+</view>

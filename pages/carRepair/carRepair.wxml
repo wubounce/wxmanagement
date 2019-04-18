@@ -1,0 +1,120 @@
+<view class="weui-tab__content" >
+<form bindsubmit="torepair">
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_select checkCar" hover-class="navigator-hover">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">检测车辆</view>
+        </view>
+        <view class="weui-cell__bd">
+          <navigator url="../searchDetection/searchDetection" hover-class="none">
+            <input disabled='true' class="weui-select weui-select_in-select-after" value="{{license}}" name="license" placeholder="车牌号" placeholder-class="phcolor"/>
+          </navigator>
+        </view>
+    </view>
+     <view class="weui-cell weui-cell_select checkCar">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">司机</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input disabled="true" class="weui-input" value='{{driver}}' name="driver" placeholder="司机姓名" placeholder-class="phcolor"/>
+        </view>
+    </view>
+    <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">司机电话</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input disabled="true" class="weui-input" value='{{phone}}' name="phone" placeholder="手机号" placeholder-class="phcolor"/>
+        </view>
+    </view>
+  </view>
+
+  <view class="weui-cells weui-cells_after-title zebra status">
+    <view class="weui-cell weui-cell_select">
+        <view class="carStatus weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">车辆状态</view>
+        </view>
+    </view>   
+  </view>
+  <view class="weui-cells weui-cells_after-title">
+      <radio-group bindchange="radioChange">
+          <label class="weui-cell weui-check__label" wx:for="{{radioItems}}" wx:key="{{item.value}}">
+              <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+              <view class="weui-cell__hd weui-check__hd_in-checkbox">
+                  <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+                  <icon class="weui-icon-checkbox_success iconcolor" type="success" size="23" wx:if="{{item.checked}}" color="#3E85FF"></icon>
+              </view>
+              <view class="weui-cell__bd">{{item.name}}</view>
+          </label>
+      </radio-group>
+       <view >
+      <!-- <view class='license'>
+      <checkbox-group bindchange="checkboxChange">
+        <label bindtap="clickCheck" class="weui-check__label" wx:for-items="{{liceniseArr}}" data-index="{{index}}" wx:key="{{item.value}}" class='label'>
+            <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+            <view><text class="{{index===current&&availableStatus ==='3'?'current':''}}">{{item.name}}</text></view>
+        </label>
+      </checkbox-group>
+      </view> -->
+      <view class="weui-cell chcekCont" wx:if="{{mShow}}">
+        <checkbox-group bindchange="checkboxChange">
+
+          <label class="checkbox weui-cells">
+            <checkbox value="{{repair.value}}" checked="{{repair.checked}}" /><text class="">{{repair.name}}</text>
+          </label>
+          <view class="weui-cell weui-cell_select checkselect">
+              <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                <view class="weui-label">{{repair.pmName}}</view>
+              </view>
+              <view class="weui-cell__bd">
+                <navigator url="../supplier/supplier?repairName={{repairName}}" hover-class="none">
+                  <input disabled='true' class="weui-select weui-select_in-select-after" value="{{repairName}}" name="repairName" placeholder="选择{{repair.pmName}}" placeholder-class="phcolor"/>
+                </navigator>
+              </view>
+          </view>
+          <view class="weui-cell weui-cell_select checkselect">
+              <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                <view class="weui-label">{{repair.planTime}}</view>
+              </view>
+              <view class="weui-cell__bd">
+                <picker class="weui-select" placeholder="请选择日期" mode="date" value="{{date}}"  bindchange="repairDate">
+                  <view class="weui-input ondate">{{repairDate}}</view>
+                </picker>
+              </view>
+          </view>
+          <view class="hr"></view>
+
+          <label class="checkbox weui-cells">
+              <checkbox value="{{maintain.value}}" checked="{{maintain.checked}}" /><text class="">{{maintain.name}}</text>
+              
+            </label>
+
+            <view class="weui-cell weui-cell_select checkselect">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                  <view class="weui-label">{{maintain.pmName}}</view>
+                </view>
+                <view class="weui-cell__bd">
+                  <navigator url="../supplierT/supplierT?maintainName={{maintainName}}" hover-class="none">
+                    <input disabled='true' class="weui-select weui-select_in-select-after" value="{{maintainName}}" name="maintainName" placeholder="选择{{maintain.pmName}}" placeholder-class="phcolor"/>
+                  </navigator>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_select checkselect">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                  <view class="weui-label">{{maintain.planTime}}</view>
+                </view>
+                <view class="weui-cell__bd">
+                  <picker class="weui-select" placeholder="请选择日期" mode="date" value="{{date}}" bindchange="maintainDate">
+                    <view class="weui-input ondate">{{maintainDate}}</view>
+                  </picker>
+                </view>
+            </view>
+            
+        </checkbox-group>
+      </view>
+      
+    </view> 
+  </view>
+  <button hover-class="navigator-hover" class="weui-btn createdDispatch" type="primary" formType="submit">提交</button>
+   </form>
+</view>

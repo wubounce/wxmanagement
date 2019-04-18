@@ -1,0 +1,25 @@
+<view class='page'>
+  <view class="backGround">
+      <image class="changanLogo" src="../image/changan.png"></image>
+  </view>
+  <form bindsubmit="tologin" bindreset="formReset">
+    <view class="input">
+      <view class="weui-cell__bd">
+        <view class='loginfont icon-mobile'></view>
+        <input class="weui-input" value='{{account}}' name="account" placeholder="请输入用户名或手机号" />
+      </view>
+      </view>
+    <view class="input" style='borer-bottm:1rpx solid #ededed'>
+      <view class="weui-cell__bd">
+        <view class='loginfont icon-Password'></view>
+        <input password='{{isshow}}' placeholder="新密码，至少6位英文数字结合" class="weui-input" value='{{password}}' name="password" placeholder="请输入密码" />
+        <view bindtap='isshowPwd'  class='iconfont' style='width:25px'>
+          <image style='width:20px;height:15px' wx:if="{{!isshow}}" src='../image/show2x.png'></image>
+          <image style='width:20px;height:15px' wx:if="{{isshow}}" src='../image/nshow2x.png'></image>
+        </view>
+      </view>
+    </view>
+    <button hover-class="navigator-hover" class="weui-btn createdDispatch" type="primary" formType="submit">登录</button>
+  </form>
+</view>
+

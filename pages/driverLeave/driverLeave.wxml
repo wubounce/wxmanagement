@@ -1,0 +1,84 @@
+<view class='page' style="padding-top:10px">
+  <view class='noevent' wx:if="{{list.length<=0}}">当前无请假审核</view>
+  <view wx:else>
+    <block wx:for-items="{{list}}" wx:key="{{index}}">
+      <view class="preview" wx:if="{{item.examineStatus==='待审批'}}">
+        <view class="leaveTitle">
+            <view class="weui-form-preview__item otner__item">
+                <view class="weui-form-preview__label">申请日期</view>
+                <view class="weui-form-preview__value_in-hd">{{item.createTime}}</view>
+            </view>
+        </view>
+        <view class="weui-form-preview__bd">
+            <view class="weui-media-box weui-media-box_appmsg">
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg"  style="{{item.cancel?'background:#999':''}}">
+                    <text class="iconfont icon-fukuanshenqing" style="font-size: 80rpx;;color:#fff"></text>
+                </view>
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                    <view class="weui-media-box__desc">{{item.cancel?item.driverName+'（已取消）':item.driverName}}</view>
+                    <view class="weui-media-box__desc">共{{item.duration}}天<text class='boroowtype'>( {{item.startTime}} 至 {{item.endTime}} )</text></view>
+                </view>
+            </view>
+            <view class="weui-form-preview__item boroowresaze otner__item">
+                <view class="weui-form-preview__label">请假原因：{{item.description}}</view>
+            </view>
+        </view>
+        <view class="weui-form-preview__ft" hidden="{{item.cancel}}">
+            <button hover-class="callClick" class="weui-btn mini-btn driverBtn" style="border-color:rgb(252, 101, 81);color:rgb(252, 101, 81)" type="primary" plain="true" bindtap="showM" data-examineStatus='3' data-id='{{item.id}}'>拒绝申请</button>
+            <view><button hover-class="agreeClick" class="weui-btn mini-btn createdfull" style="border-color:rgb(20, 180, 177);color:rgb(20, 180, 177)" type="primary" plain="true" bindtap="powerDrawer"bindtap="showM" data-examineStatus='2' data-id='{{item.id}}'>同意申请</button></view>
+
+        </view>
+      </view>
+      <view class="preview" wx:if="{{item.examineStatus!=='待审批'}}">
+        <view class="leaveTitle">
+            <view class="weui-form-preview__item otner__item">
+                <view class="weui-form-preview__label">申请日期</view>
+                <view class="weui-form-preview__value_in-hd">{{item.createTime}}</view>
+            </view>
+        </view>
+        <view class="weui-form-preview__bd">
+          <view class="weui-media-box weui-media-box_appmsg">
+              <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                  <text class="iconfont icon-fukuanshenqing" style="font-size: 80rpx;color:#fff"></text>
+              </view>
+              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                  <view class="weui-media-box__desc">{{item.driverName}}<text class="weui-badge {{item.examineStatus==='驳回'?'disagreeexm':''}}" style="margin-left: 5px;">{{item.examineStatus}}</text></view>
+                  <view class="weui-media-box__desc">共{{item.duration}}天<text class='boroowtype'>( {{item.startTime}} 至 {{item.endTime}} )</text></view>
+              </view>
+            </view>
+            <view class="weui-form-preview__item boroowresaze otner__item">
+              <view class="weui-form-preview__label">请假原因：{{item.description}}</view>
+            </view>
+        </view>
+        <view class="auditInfo">
+            <view class="weui-form-preview__item otner__item">
+                <view class="weui-form-preview__label">审核人员：{{item.examineUserName?item.examineUserName:''}}</view>
+            </view>
+            <view class="weui-form-preview__item otner__item">
+                <view class="weui-form-preview__label">审核时间：{{item.examineTime?item.examineTime:''}}</view>
+            </view>
+            <view class="weui-form-preview__item">
+                <view class="weui-form-preview__label">审核备注：{{item.examineRemark?item.examineRemark:''}}</view>
+            </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <view class="mask" catchtouchmove="ture" wx:if="{{showModal}}"></view>
+  <view class="modalDlg" wx:if="{{showModal}}" catchtouchmove="ture">
+    <form bindsubmit="examine">
+      <view class='mtitle'><text>请假明细-{{examineStatus==='3'?"拒绝":"同意"}}</text><text class='iconfont icon-cc-close-circle close' bindtap='close'></text></view>
+      <view class='content'>
+        <view><textarea  fixed="true" show-confirm-bar="{{false}}" class="weui-textarea" placeholder-class="phcolor" value='{{examineRemark}}' name="examineRemark" placeholder="请输入备注" style="height: 180rpx;box-sizing: border-box" /></view>
+        <view>备注筛选</view>
+        <view class='license'>
+          <block wx:for-items="{{examineStatus==='3'?disagreeArr:agreeArr}}" wx:key="{{index}}">
+              <view bindtap="getLicense" data-remark="{{item}}"><text>{{item}}</text></view>
+              </block>
+        </view>
+     </view>
+      <button hover-class="navigator-hover" disabled="{{disabled}}" class="weui-btn exmbtn {{examineStatus==='3'?'disagreeexm':''}}" type="primary" formType="submit">{{examineStatus==='3'?"拒绝":"同意"}}申请</button>
+    </form>
+  </view>
+</view>

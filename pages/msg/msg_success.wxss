@@ -1,0 +1,6 @@
+page {
+  background: #fff;
+}
+.weui-btn {
+  background:#3E85FF !important;
+}

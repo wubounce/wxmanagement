@@ -1,0 +1,32 @@
+<view class='page'>
+  <form bindsubmit="changePwd">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_select">
+          <view class="weui-cell__hd weui-cell__hd_in-select-after">
+            <view class="weui-label">原密码</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" value='{{oldPassword}}' name="oldPassword" placeholder="原密码" placeholder-class="phcolor"/>
+          </view>
+      </view>
+      <view class="weui-cell weui-cell_select">
+          <view class="weui-cell__hd weui-cell__hd_in-select-after">
+            <view class="weui-label">新密码</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" value='{{newPassword}}' name="newPassword" placeholder="新密码" placeholder-class="phcolor"/>
+          </view>
+      </view>
+      <view class="weui-cell weui-cell_select">
+          <view class="weui-cell__hd weui-cell__hd_in-select-after">
+            <view class="weui-label">新密码</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" value='{{newPasswordCheck}}' name="newPasswordCheck" placeholder="再次输入新密码" placeholder-class="phcolor"/>
+          </view>
+      </view>
+    </view>
+    <button hover-class="navigator-hover" class="weui-btn createdDispatch" type="primary" formType="submit">提交</button>
+  </form>
+</view>
+

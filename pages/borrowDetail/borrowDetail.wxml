@@ -1,0 +1,97 @@
+<view class='page' style="padding-top:10px">
+  <view class="preview" wx:if="{{details.examineStatus==='待审核'}}">
+    <view class="applyDate">
+        <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">借款时间</view>
+            <view class="weui-form-preview__value_in-hd" style='float:right'>{{details.validityTime}}</view>
+        </view>
+    </view>
+    <view class="weui-form-preview__bd">
+        <view class="weui-media-box weui-media-box_appmsg">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg" style="{{details.cancel?'background:#999;':''}}">
+                <text class="iconfont icon-fukuanshenqing" style="font-size: 80rpx;;color:#fff"></text>
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__desc">{{details.cancel?details.driverName+'（已取消）':details.driverName}}</view>
+                <view class="weui-media-box__desc">申请{{details.money?details.money/100:''}}元  <text class='boroowtype'>({{details.typeName}})</text></view>
+            </view>
+        </view>
+        <view class="weui-form-preview__item other">
+            <view class="weui-form-preview__label">借款原因：{{details.description?details.description:''}}</view>
+        </view>
+    </view>
+    <view class="weui-form-preview__ft" hidden="{{details.cancel}}">
+      <button hover-class="callClick" class="weui-btn mini-btn driverBtn" style="border-color:rgb(252, 101, 81);color:rgb(252, 101, 81)" type="primary" plain="true" bindtap="showM" data-examineStatus='3'>拒绝申请</button>
+        <view><button hover-class="agreeClick"  class="weui-btn mini-btn createdfull" style="border-color:rgb(20, 180, 177);color:rgb(20, 180, 177)" type="primary" plain="true"  bindtap="showM" data-examineStatus='2'>同意申请</button></view>
+        
+    </view>
+  </view>
+  <view class="preview" wx:if="{{details.examineStatus!=='待审核'}}">
+    <view class="applyDate">
+      <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">借款时间</view>
+          <view class="weui-form-preview__value_in-hd" style='float:right'>{{details.validityTime}}</view>
+      </view>
+    </view>
+    <view class="weui-form-preview__bd">
+      <view class="weui-media-box weui-media-box_appmsg">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+              <text class="iconfont icon-fukuanshenqing" style="font-size: 80rpx;;color:#fff"></text>
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+              <view class="weui-media-box__desc">{{details.driverName}}<text class="weui-badge" style="margin-left:10px;padding:1px 6px;background-color:{{details.color}}">{{details.examineStatus}}</text></view>
+              <view class="weui-media-box__desc">申请{{details.money?details.money/100:''}}元  <text class='boroowtype'>({{details.typeName}})</text></view>
+          </view>
+        </view>
+        <view class="weui-form-preview__item other">
+          <view class="weui-form-preview__label">借款原因：{{details.description?details.description:''}}</view>
+        </view>
+    </view>
+    <view class="weui-form-preview__bd" style="border-top:1px solid #e2e2e2;">
+        <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">审批金额：<text style="color:#3e85ff ;font-weight:700">{{details.examineMoney?details.examineMoney/100:0}}元</text></view>
+        </view>
+        <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">审核人员：{{details.examineUserName?details.examineUserName:''}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">审核时间：{{details.examineTime?details.examineTime:''}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">审核备注：{{details.examineRemark?details.examineRemark:''}}</view>
+        </view>
+    </view>
+
+    <view class="weui-form-preview__ft" wx:if="{{details.examineStatus === '已审批' || details.examineStatus === '已驳回'}}">
+      <button hover-class="cancelClick" class="weui-btn mini-btn driverBtn" style="border-color:#ff9900;color:#ff9900" type="primary" plain="true" bindtap="backAudit" data-loanid="{{details.id}}">回退审核</button>
+        
+    </view>
+
+  </view>
+
+  
+</view>
+
+<!--审核-->
+<view class="mask" catchtouchmove="ture" wx:if="{{showModal}}"></view>
+  <view class="modalDlg" wx:if="{{showModal}}" catchtouchmove="ture">
+   <form bindsubmit="examine">
+     <view class='mtitle'><text>借款明细-{{examineStatus==='3'?"拒绝":"同意"}}</text><text class='iconfont icon-cc-close-circle close' bindtap='close'></text></view>
+     <view class='content'>
+      <view>申请类型：{{details.typeName}}</view>
+      <view>申请金额：{{details.money/100}}元</view>
+      <view class='exmoney' wx:if="{{examineStatus==='3'}}" style="position:relative"><text>审批金额：</text><input disabled="true" style="padding-left:3px;width: 150px;border:none" class="weui-input" placeholder-class="phcolor" value="{{examineMoney?examineMoney:0}}" name="examineMoney" placeholder="请输入审批金额"/><text class="bhUnit">元</text></view>
+      <view class='exmoney' wx:else><text>审批金额：</text><input type="digit" style="padding-left:3px;width: 150px" class="weui-input" placeholder-class="phcolor" value="{{examineMoney?examineMoney:0}}" name="examineMoney" placeholder="请输入审批金额"/>元</view>
+      <view>
+       <textarea fixed="true" show-confirm-bar="{{false}}" class="weui-textarea" placeholder-class="phcolor" value='{{examineRemark}}' name="examineRemark" placeholder="请输入审批备注" style="height: 180rpx;box-sizing: border-box" />
+      </view>
+      <view>备注审批</view>
+      <view class='license'>
+        <block wx:for-items="{{examineStatus==='3'?disagreeArr:agreeArr}}" wx:key="{{index}}">
+            <view bindtap="getLicense" data-remark="{{item}}"><text>{{item}}</text></view>
+            </block>
+      </view>
+     </view>
+      <button hover-class="navigator-hover" disabled="{{disabled}}" class="weui-btn exmbtn {{examineStatus==='3'?'disagreeexm':''}}" type="primary" formType="submit">{{examineStatus==='3'?"拒绝":"同意"}}申请</button>
+    </form>
+  </view>

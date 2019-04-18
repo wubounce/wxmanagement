@@ -1,0 +1,59 @@
+<view class="weui-tab__content" >
+  <form bindsubmit="torepair">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_select checkCar" hover-class="currentClick">
+          <view class="weui-cell__hd weui-cell__hd_in-select-after">
+            <view class="weui-label">调度单号</view>
+          </view>
+          <view class="weui-cell__bd">
+            <navigator url="../searchWayBill/searchWayBill?wayBillNum={{wayBillNum}}" hover-class="none">
+              <input disabled='true' class="weui-select weui-select_in-select-after" value="{{wayBillNum}}" name="wayBillNum" placeholder="请选择调度单号" placeholder-class="phcolor"/>
+            </navigator>
+          </view>
+      </view>
+       <view class="weui-cell weui-cell_select checkCar">
+          <view class="weui-cell__hd weui-cell__hd_in-select-after">
+            <view class="weui-label">车牌号</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input disabled class="weui-input" value="{{truckLicense?truckLicense+'（'+driverName+'）':''}}" name="truckLicense" placeholder="车牌号（司机姓名）" placeholder-class="phcolor"/>
+          </view>
+      </view>
+      <view class="weui-cell weui-cell_select checkCar">
+          <view class="weui-cell__hd weui-cell__hd_in-select-after">
+            <view class="weui-label">线路名称</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input disabled class="weui-input" value='{{routeName}}' name="routeName" placeholder="线路名称" placeholder-class="phcolor"/>
+          </view>
+      </view>
+      <view class="weui-cell weui-cell_select checkCar">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">调度状态</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input disabled class="weui-input" value='{{status}}' name="status" placeholder="调度状态" placeholder-class="phcolor"/>
+        </view>
+    </view>
+
+
+
+    <view class="weui-cell weui-cell_select checkCar">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after">
+        <view class="weui-label">变更状态</view>
+      </view>
+      <view class='item-con' style="width:100%">
+        <view class="weui-cell__bd  weui-select wayStatus">
+          <picker bindchange="bindPickerChange" range-key="label" value="{{value}}" range="{{statusList}}">
+            <view class="picker" style="{{statusLabel?'color: black':'color: #999'}}">{{statusLabel?statusLabel:'请选择运输状态'}}</view>
+          </picker>
+        </view>
+      </view>
+  </view>
+
+    </view>
+    <button hover-class="navigator-hover" class="weui-btn createdDispatch" type="primary" bindtap="beChange">确定修改</button>
+    <button hover-class="navigator-hover" class="weui-btn createdDispatch1" type="primary" bindtap="goBack">返回</button>
+     </form>
+  </view>
+  

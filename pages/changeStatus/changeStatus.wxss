@@ -1,0 +1,122 @@
+.zebra {
+  margin-top:20px;
+}
+.status{
+  height:44px;
+  line-height:44px;
+}
+.iconcolor{
+  color: #3E85FF;
+}
+.phcolor{  
+    color: #999999;
+}
+.createdDispatch {
+  margin-top:100px;
+  background:#3E85FF !important;
+  border-radius:25px;
+  width:90%;
+}
+.license {
+  padding: 20px 10px;
+  width:100%;
+  overflow:hidden;
+
+}
+.license .label {
+  position: relative;
+  float: left;
+  width: 20%;
+  margin-bottom: 20px;
+}
+.license .label text {
+    background: rgb(240, 242, 245);
+    -webkit-border-radius: 20;
+    -moz-border-radius: 20;
+    border-radius: 20px;
+    /* font-size: 14px; */
+    color: #000;
+    padding: 10px 18px 10px 18px;
+}
+.license .label .current {
+  background: #3E85FF;
+  color: #fff;
+}
+.isshow{
+  width:100%;
+  height:84px;
+  position:absolute;
+  z-index: 99;
+}
+.carStatus {
+  width: 100%;
+  background: #eee;
+  border-bottom: none;
+}
+.chcekCont {
+  font-family: '微软雅黑';
+  /* font-size: 14px; */
+}
+.chcekCont{
+  padding-right: 0!important;
+  padding-left: 0!important;
+  position: absolute;
+  z-index: 999;
+  padding-bottom: 0!important;
+}
+.weui-cell {
+  position: static;
+}
+.weui-cells{
+  position: static;
+}
+.weui-cell_select{
+  position: static;
+}
+.checkCar {
+  border-bottom: 1px solid #eee;
+  padding: 5px 0;
+}
+radio-group {
+  border-bottom: 1px solid #eee;
+}
+checkbox {
+  transform:scale(.8);
+}
+.hr {
+  height: 1px;
+  width: 100%;
+  background: #eee;
+  margin-bottom: 8px;
+}
+.checkbox{
+  padding-left: 35px;
+}
+.checkselect {
+  padding-left: 45px;
+}
+.weui-check__label {
+  border-top: 8px solid #eee;
+}
+.weui-check__label:first-child{
+  border-top: none;
+}
+checkbox-group {
+  width: 100%;
+}
+.wayStatus {
+  border: none;
+  padding-left:0;
+}
+.createdDispatch {
+  margin-top:90px;
+  background:#3E85FF !important;
+  border-radius:25px;
+  width:88%;
+}
+.createdDispatch1 {
+  margin-top:30px;
+  background:#3E85FF !important;
+  border-radius:25px;
+  width:88%;
+}

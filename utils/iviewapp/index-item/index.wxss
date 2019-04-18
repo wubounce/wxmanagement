@@ -1,0 +1,16 @@
+.i-index-item-header {
+  height: 0px;
+  line-height: 30px;
+  background: #eee;
+  font-size: 14px;
+  padding-left: 10px;
+  width: 100%;
+  box-sizing: border-box
+}
+
+.i-index-item-content {
+  font-size: 14px;
+  border-bottom: 1rpx solid #ccc;
+  padding: 20rpx;
+  font-size: 26rpx;
+}

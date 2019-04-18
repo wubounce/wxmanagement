@@ -1,0 +1,128 @@
+<view class="page">
+
+  <!--借款/油款tabbar-->
+  <view class="weui-navbar">
+    <block wx:for-items="{{tabs}}" wx:key="{{index}}">
+      <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+        <view class="weui-navbar__title">{{item}}</view>
+      </view>
+    </block>
+    <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+  </view>
+  <view class="weui-tab__panel" style="position:relative">
+    <!--借款的tab-->
+    <view class="weui-tab__content" wx:if="{{activeIndex == 0}}" style="{{'padding-top:10px;top:52px;width:100%;position:'+loanPosition}}">
+
+      <view class='noevent' wx:if="{{loanList.length<=0}}">当前无借款审核信息</view>
+      <view class="page__bd" wx:else>
+        <block wx:for="{{loanList}}" wx:key="{{index}}">
+          <view class="weui-panel weui-panel_access">
+
+            <view class="weui-panel__ft">
+              <navigator url="../borrowDetail/borrowDetail?id={{item.id}}&status={{item.examineStatus}}" class="navGo weui-media-box weui-media-box_appmsg"
+                hover-class="weui-cell_active" style='border-bottom: 1px solid #e9e9e9'>
+                <view class="weui-cell weui-cell_access weui-cell_link waybill">
+                  <view class="weui-cell__bd">借款单号：{{item.loanNum}}</view>
+                  <text style="{{'background:'+item.color}}" class='wayStatus'>{{item.cancel?'已取消':item.examineStatus}}</text>
+                  <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                </view>
+              </navigator>
+            </view>
+
+            <view class="weui-panel__ft">
+
+              <navigator url="../detail/detail?waybillId={{item.waybillId}}" class="navGo weui-media-box weui-media-box_appmsg"
+                hover-class="weui-cell_active" style='border-bottom: 1px solid #e9e9e9'>
+                <view class="weui-cell weui-cell_access waybill">
+                  <view class="weui-cell__bd">调度单号：{{item.waybillNum}}({{item.mileage}}KM)</view>
+                  <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                </view>
+              </navigator>
+
+            </view>
+            <view class="weui-panel__bd">
+
+              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg applyMoney">
+                <view class="weui-media-box__desc"><text>申请金额：{{item.money / 100}}元</text><text style="margin-left: 10px"
+                    wx:if="{{item.examineStatus === '已审批' || item.examineStatus === '已驳回' || item.examineStatus === '已打款' || item.examineStatus === '已还款' || item.examineStatus === '已作废'}}">（审批金额：{{item.examineMoney
+                    /100}}元）</text></view>
+              </view>
+
+              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg applyMoney">
+                <view class="weui-media-box__desc">司机姓名：{{item.driverName}} （{{item.licence}}）</view>
+              </view>
+
+              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg applyMoney">
+                <view class="weui-media-box__desc">线路名称：{{item.routeName}}</view>
+              </view>
+
+              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg applyMoney">
+                <view class="weui-media-box__desc">借款时间：{{item.validityTime}}</view>
+              </view>
+            </view>
+            <view class="weui-panel__hd time">{{item.createTime}}</view>
+          </view>
+        </block>
+      </view>
+
+    </view>
+    <!--油款的tab-->
+    <view class="weui-tab__content" wx:if="{{activeIndex == 1}}" style="{{'padding-top:10px;top:52px;width:100%;position:'+oilPosition}}">
+
+      <!-- <scroll-view scroll-y style="position: absolute; left: 0; top:0; bottom: 0; right: 0;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-top="{{oilTop}}"> -->
+        <view class='noevent' wx:if="{{iolList.length<=0}}">当前无油款审核信息</view>
+        <view class="page__bd" wx:else>
+          <block wx:for="{{iolList}}" wx:key="{{index}}">
+            <view class="weui-panel weui-panel_access">
+  
+              <view class="weui-panel__ft">
+                <navigator url="../borrowDetail/borrowDetail?id={{item.id}}&status={{item.examineStatus}}" class="navGo weui-media-box weui-media-box_appmsg"
+                  hover-class="weui-cell_active" style='border-bottom: 1px solid #e9e9e9'>
+                  <view class="weui-cell weui-cell_access weui-cell_link waybill">
+                    <view class="weui-cell__bd">借款单号：{{item.loanNum}}</view>
+                    <text style="{{'background:'+item.color}}" class='wayStatus'>{{item.cancel?'已取消':item.examineStatus}}</text>
+                    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                  </view>
+                </navigator>
+              </view>
+  
+              <view class="weui-panel__ft">
+  
+                <navigator url="../detail/detail?waybillId={{item.waybillId}}" class="navGo weui-media-box weui-media-box_appmsg"
+                  hover-class="weui-cell_active" style='border-bottom: 1px solid #e9e9e9'>
+                  <view class="weui-cell weui-cell_access waybill">
+                    <view class="weui-cell__bd">调度单号：{{item.waybillNum}}({{item.mileage}}KM)</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                  </view>
+                </navigator>
+  
+              </view>
+              <view class="weui-panel__bd">
+  
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg applyMoney">
+                  <view class="weui-media-box__desc"><text>申请金额：{{item.money / 100}}元</text><text style="margin-left: 10px"
+                      wx:if="{{item.examineStatus === '已审批' || item.examineStatus === '已驳回' || item.examineStatus === '已打款' || item.examineStatus === '已还款' || item.examineStatus === '已作废'}}">（审批金额：{{item.examineMoney
+                      /100}}元）</text></view>
+                </view>
+  
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg applyMoney">
+                  <view class="weui-media-box__desc">司机姓名：{{item.driverName}} （{{item.licence}}）</view>
+                </view>
+  
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg applyMoney">
+                  <view class="weui-media-box__desc">线路名称：{{item.routeName}}</view>
+                </view>
+  
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg applyMoney">
+                  <view class="weui-media-box__desc">借款时间：{{item.validityTime}}</view>
+                </view>
+              </view>
+              <view class="weui-panel__hd time">{{item.createTime}}</view>
+            </view>
+          </block>
+        </view>
+      <!-- </scroll-view> -->
+    </view>
+  </view>
+
+</view>

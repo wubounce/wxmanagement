@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "在途维修",
+  "usingComponents": {
+    "i-modal": "../../utils/iviewapp/modal/index"
+  },
+  "enablePullDownRefresh": true
+}

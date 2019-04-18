@@ -1,0 +1,75 @@
+import api from '../../requests/api.js'
+import utils from '../../utils/util.js'
+import moment from '../../utils/moment.js'
+const app = getApp()
+const request = app.WxRequest;
+Page({
+  data: {
+    inputShowed: false,
+    driver: "",
+    driverId: '',
+    driverList: [],
+    currentIndex:null,
+    timeout: null
+  },
+  onLoad(option){
+    this.getLicenseList()
+    this.setData({
+      driver: option.driver
+    })
+  },
+  clearInput: function () {
+    var pages = getCurrentPages();
+    var prevPage = pages[pages.length - 2];  //上一个页面
+    //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
+    prevPage.setData({
+      driver: '',
+      driverId: ''
+    })
+    this.setData({
+      driver: '',
+      driverId: ''
+    })
+  },
+  inputTyping: function (e) {
+    let inputVal = e.detail.value
+    wx.showLoading({
+      title: '正在加载...',
+    })
+    this.data.timeout = setTimeout(() => {
+      request.getRequest(api.driverList, { data: { pageNo: 1, pageSize: 18, realNameLk: inputVal } }).then(res => {
+        wx.hideLoading()
+        const chooseList = res.data;
+        this.setData({
+          driverList: chooseList ? chooseList : ''
+        });
+        this.setData({
+          timeout: null
+        })
+      });
+    }, 500);
+  },
+  getLicense(e){
+    var pages = getCurrentPages();
+    var currPage = pages[pages.length - 1];   //当前页面
+    var prevPage = pages[pages.length - 2];  //上一个页面
+
+    //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
+    prevPage.setData({
+      driver: e.currentTarget.dataset.driver,
+      driverId: e.currentTarget.dataset.driverid
+    })
+    this.setData({
+      driver: e.currentTarget.dataset.driver,
+      driverId: e.currentTarget.dataset.driverid,
+      currentIndex: e.currentTarget.dataset.index
+    })
+  },
+  getLicenseList() {
+    request.getRequest(api.driverList,{data:{pageNo:1,pageSize:18}}).then(res => {
+      this.setData({
+        driverList: res.data,
+      });
+    })
+  }
+});

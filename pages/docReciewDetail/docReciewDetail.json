@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "单据明细",
+  "usingComponents": {
+    "i-modal": "../../utils/iviewapp/modal/index"
+  },
+  "enablePullDownRefresh": true
+}

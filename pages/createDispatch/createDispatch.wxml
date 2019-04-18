@@ -1,0 +1,166 @@
+<view class="page">
+  <view class="weui-tab">
+    <view class="weui-navbar">
+        <block wx:for-items="{{tabs}}" wx:key="{{index}}">
+            <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                <view class="weui-navbar__title">{{item}}</view>
+            </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+    </view>
+    <view class="weui-tab__panel">
+      <view class="weui-tab__content" hidden="{{activeIndex != 0}}" style="padding-bottom:15px">
+        <form>
+          <view class="weui-cells weui-cells_after-title zebra">
+            <radio-group bindchange="radioChange" style="padding:3px 0">
+              <label class="weui-check__label chooseLabel" wx:for="{{radioItems}}" wx:key="{{item.value}}">
+                <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+                <view class="weui-cell__hd weui-check__hd_in-checkbox">
+                  <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+                  <icon class="weui-icon-checkbox_success iconcolor" type="success" size="23" wx:if="{{item.checked}}" color="#3E85FF"></icon>
+                </view>
+                <view class="weui-cell__bd">{{item.name}}</view>
+              </label>
+            </radio-group>
+          </view >
+                 
+          <view class="weui-cells weui-cells_after-title zebra">
+              <view class="weui-cell weui-cell_select" style="padding:4px 0">
+                  <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                      <view class="weui-label">开始站点</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                      <navigator url="../searchSite/searchSite?siteflag=startSiteId&license={{startSite}}" hover-class="navigator-hover">
+                      <input class="weui-select weui-select_in-select-after {{startSite?'':'phcolor'}}" placeholder='请选择开始站点' value='{{startSite}}' name="startSite" disabled='true'></input>
+                    </navigator>
+                  </view>
+              </view>
+              <!-- <view class='changeway'> -->
+                <block wx:for="{{waySitItems}}" wx:key="{{index}}">
+                  <view class="weui-cell weui-cell_select" style="padding:4px 0">
+                    <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                        <view class="weui-label">途经站点{{index+1}}</view>
+                    </view>
+                    <view class="weui-cell__bd waysite">
+                    <text class='iconfont icon-tianjia' bindtap='handleAdd' wx:if="{{index===0}}"></text>
+                    <view data-index="{{index}}" class='iconfont jian' bindtap='handleReduce' wx:else><view class="hr"></view></view>
+                    <!-- <text data-index="{{index}}" class='iconfont icon-tianjia jian' bindtap='handleReduce' wx:else></text> -->
+                        <navigator url="../searchSite/searchSite?siteflag={{index}}&license={{item.name}}" hover-class="navigator-hover">
+                        <input class="weui-select weui-select_in-select-after {{item.name?'':'phcolor'}}" placeholder='请选择途经站点' value='{{item.name}}' name="item.name" disabled='true'></input>
+                      </navigator>
+                    </view>
+                  </view>
+                </block>
+              <!-- </view> -->
+
+              <view class="weui-cell weui-cell_select" style="padding:4px 0">
+                  <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                      <view class="weui-label">到达站点</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                       <navigator url="../searchSite/searchSite?siteflag=endSiteId&license={{endSite}}" hover-class="navigator-hover">
+                      <input class="weui-select weui-select_in-select-after {{endSite?'':'phcolor'}}" placeholder='请选择到达站点' value='{{endSite}}' name="endSite" disabled='true'></input>
+                    </navigator>
+                  </view>
+              </view>
+
+              <view class="weui-cell weui-cell_select" style="padding:4px 0">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                  <view class="weui-label blue">发车时间</view>
+                </view>
+                <view class="weui-cell__bd ontime" >
+                  <picker mode="date" value="{{date}}" bindchange="bindDateChange">
+                    <view class="weui-input ondate blue" style="{{date==='请选择发车时间'?'color:#999':'color:#2292DD'}}">{{date}}</view>
+                  </picker>
+                  <picker mode="time" value="{{time}}" bindchange="bindTimeChange">
+                    <view class="weui-input blue">{{time}}</view>
+                  </picker>
+                </view>
+            </view>
+
+          </view>
+          <view class="weui-cells weui-cells_after-title zebra">
+              <view class="weui-cell weui-cell_select carBox" style="padding:4px 0">
+                  <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">车牌号</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                    <navigator url="../canUse/canUse?license={{license}}" hover-class="navigator-hover">
+                      <input class="weui-select weui-select_in-select-after {{license?'':'phcolor'}}" placeholder='请选择车牌号' value='{{license}}' name="license" disabled='true'></input>
+                    </navigator>
+                  </view>
+                  <view class='driver'>{{driverName?'(' +driverName+ ')':''}}</view>
+              </view>
+          </view>
+          <button hover-class="navigator-hover" class="weui-btn createdDispatch" data-type="1" type="primary" bindtap="creatbill">创建调度单</button>
+          <button  hover-class="navigator-hover" class="weui-btn createdDispatch1" data-type="0" type="primary" bindtap="creatbill">创建并下发</button>
+        </form>
+      </view>
+      <!-- 选项二的内容 -->
+      <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+        <view class='chooseTj'>
+          <view class='tjtab' wx:for="{{tjList}}" wx:key="{{index}}"><text data-index="{{index}}" data-statusval="{{item.value}}" bindtap='chooseClick' class="{{currentTab === index?'tjTab':'tjText'}}">{{item.name}}</text></view>
+        </view>
+        <block wx:for-items="{{waybillList}}" wx:key="{{index}}">
+          <view class="weui-form-preview" style="{{index===0?'margin-top:0':''}}">
+            <navigator url="../detail/detail?waybillId={{item.id}}" hover-class="currentClick">
+            <view class="weui-panel__ft" style="border-bottom:1rpx solid #d5d5d5;">
+                <view class="weui-cell weui-cell_access weui-cell_link">
+                    <view class="weui-cell__bd" style="color:#333;">调度单号：{{item.num}}</view>
+                     <view class="weui-form-preview__value_in-hd" style='font-size:14px;'>{{item.createTime}}</view>
+                    <!-- 调度单的箭头 -->
+                    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                </view>
+            </view>
+            </navigator>
+            <view class="weui-form-preview__bd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">司机：{{item.driverName}}<text class='liceniseNum'>（{{item.truckLicense}}）</text><text style="background-color:{{item.background}}" class='statusColor'>{{item.status}}</text></view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">线路：{{item.routeName}}</view>
+                </view>
+                <view wx:if="{{!item.actualDepartureTime&&item.planDepartureTime}}" class="weui-form-preview__item"  >
+                  <view class="weui-form-preview__label">计划发车时间：{{item.planDepartureTime}}</view>
+                </view>
+                <view wx:if="{{item.actualDepartureTime}}" class="weui-form-preview__item"  >
+                  <view class="weui-form-preview__label">实际发车时间：{{item.actualDepartureTime}}</view>
+                </view>
+                <view class="weui-form-preview__item" wx:if="{{item.actualArriveTime}}">
+                  <view class="weui-form-preview__label">实际到达时间：{{item.actualArriveTime}}</view>
+                </view>
+                <view class="weui-form-preview__item" wx:if="{{item.planArriveTime && !item.actualArriveTime}}">
+                  <view class="weui-form-preview__label">计划到达时间：{{item.planArriveTime}}</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__ft" style="position: relative">
+            <text class="kongText" wx:if="{{item.nextWaybillNum}}">空载已创建</text>
+            <button hover-class="callClick" class="weui-btn mini-btn driverBtn" style="border-color:rgb(252, 101, 81);color:rgb(252, 101, 81)" type="primary" plain="true" data-driver="{{item.driverPhone}}" bindtap='callDriver'>联系司机</button>
+              <button  hover-class="reportClick" wx:if="{{item.status==='已送达'}}" class="weui-btn mini-btn createdfull" style="border-color:#3E85FF;color:#3E85FF" type="primary" plain="true" data-id="{{item.id}}" bindtap="beFinish">确认完成</button>
+              <button hover-class="reportClick" wx:if="{{item.status==='待下发'}}" class="weui-btn mini-btn createdfull" style="border-color:#3E85FF;color:#3E85FF" type="primary" plain="true" data-id="{{item.id}}" bindtap="xfEvent">下发任务</button>
+              
+              <navigator hidden="{{ item.status === '已作废' || item.nextWaybillNum || !item.allowedDryrun || !item.hasBase || !item.autBtn }}" url="../emptyDispatch/emptyDispatch?driverName={{item.driverName}}&driverPhone={{item.driverPhone}}&truckLicense={{item.truckLicense}}&planArriveTime={{item.planArriveTime}}&actualArriveTime={{item.actualArriveTime}}&routeName={{item.routeName}}&waybillId={{item.id}}&planDepartureTime={{item.planDepartureTime}}&actualDepartureTime={{item.actualDepartureTime}}" hover-class="none">
+                <button  hover-class="reportClick" style="border-color:#3E85FF;color:#3E85FF" class="weui-btn mini-btn createdfull" type="primary" plain="true" >新增空载</button>
+              </navigator>
+            </view>
+          </view>
+        </block>
+        <view class="noInfo" wx:if="{{waybillList.length == 0}}">
+          <text>当前无调度单信息</text>
+        </view> 
+      </view>
+    </view>
+  </view>
+</view>
+
+<!--前一趟是空载是否继续创建重载的弹框-->
+<view class="mask" wx:if="{{lastModal}}"></view>
+<view class="lastWay" wx:if="{{lastModal}}">
+  <view><icon type="info" size="20" /><text style="margin-left:10px">提示</text></view>
+  <view style="margin-top:18px;">上一单不是空载调度，确定创建调度单？</view>
+  <view>
+    <button class="beOk" disabled="{{okText!=='确定'}}"  bindtap="beOk">{{okText}}</button>
+    <button class="beOk" bindtap="cancel">取消</button>
+    
+  </view>
+</view>

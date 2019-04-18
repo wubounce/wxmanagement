@@ -1,0 +1,31 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+          <view class="weui-cell__bd">头像</view>
+          <view class="weui-cell__ft"> <image class='avatarImage' src="../image/touxiangChangan.png"></image></view>
+      </view>
+      <view class="weui-cell">
+          <view class="weui-cell__bd">用户名</view>
+          <view class="weui-cell__ft">{{userInfo.username?userInfo.username:''}}</view>
+      </view>
+      <view class="weui-cell">
+          <view class="weui-cell__bd">姓名</view>
+          <view class="weui-cell__ft">{{userInfo.realName}}</view>
+      </view>
+      <view class="weui-cell">
+          <view class="weui-cell__bd">手机号</view>
+          <view class="weui-cell__ft">{{userInfo.phone?userInfo.phone:'无'}}</view>
+      </view>
+    </view>
+  </view>
+  <view class='action'>
+    <navigator url='../changePwd/changePwd' hover-class="none" class='navbtn'>
+     <button hover-class="navigator-hover" class="weui-btn createdDispatch" type="primary">修改密码</button>
+    </navigator>
+    <view>
+      <button hover-class="navigator-hover" class="weui-btn createdDispatch" type="primary" bindtap='logout'>退出登录</button>
+    </view>
+  </view>
+  <view class="bb">V 1.10.26a</view>
+</view>

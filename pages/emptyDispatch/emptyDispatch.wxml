@@ -1,0 +1,90 @@
+<view class="page">
+  <view class="weui-tab__content" >
+  <form bindsubmit="addEmptyFun">
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_select">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label">司机</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" value='{{driver}}' placeholder="司机姓名" placeholder-class="phcolor" disabled="true"/>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_select">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label">车牌号</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" value='{{license}}' placeholder="请输入手机号" placeholder-class="phcolor" disabled="true"/>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_select">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label">手机号</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" value='{{phone}}' placeholder="请输入手机号" placeholder-class="phcolor" disabled="true"/>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_select">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label">发车站点</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" value='{{startName}}' placeholder="开始站点" placeholder-class="phcolor" disabled="true"/>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_select">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                <view class="weui-label">目的站点</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker bindchange="bindrouteChange" value="{{routeIndex}}" range="{{route}}" range-key="siteNames">
+                    <view class="weui-select weui-select_in-select-after">{{route[routeIndex].siteNames}}</view>
+                </picker>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_select">
+          <view class="weui-cell__hd weui-cell__hd_in-select-after">
+            <view class="weui-label blue">发车时间</view>
+          </view>
+          <view class="weui-cell__bd ontime" >
+            <picker mode="date" value="{{fcDate}}" bindchange="fcbindDate">
+              <view class="weui-input ondate blue">{{fcDate}}</view>
+            </picker>
+            <picker mode="time" value="{{fcdateTime}}" bindchange="fcbindTime">
+              <view class="weui-input blue">{{fcdateTime}}</view>
+            </picker>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_select">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label blue">到达时间</view>
+            </view>
+            <view class="weui-cell__bd ontime" >
+              <picker mode="date" value="{{date}}" bindchange="bindDateChange">
+                <view class="weui-input ondate blue">{{date}}</view>
+              </picker>
+              <picker mode="time" value="{{time}}" bindchange="bindTimeChange">
+                <view class="weui-input blue">{{time}}</view>
+              </picker>
+            </view>
+        </view>
+
+        <view class="weui-cell weui-cell_select">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="wayLabel wayzz">重载：</view>
+            </view>
+            <view class="weui-cell__bd wayzz">
+              <text style='margin-right:15px'>出发：{{overloadFcTime}}</text>
+              <text>到达：{{overloadDdTime}}</text>
+            </view>
+        </view>
+
+    </view>
+    <button hover-class="navigator-hover" class="weui-btn createdDispatch" type="primary" formType="submit">创建并下发</button>
+
+    <button hover-class="navigator-hover" class="weui-btn createdDispatch1" bindtap="back" type="primary">返回</button>
+   </form>
+  </view>
+</view>

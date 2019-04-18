@@ -1,0 +1,66 @@
+page{
+    background-color: #fff;
+}
+.input {
+  padding:0 40rpx;
+  height: 160rpx;
+}
+.weui-cell__bd {
+  display: flex;
+  height: 160rpx;
+  min-height:160rpx;
+  line-height:160rpx;
+  border-bottom:1rpx solid #D5D5D6;
+}
+.weui-input{
+  height: 160rpx;
+  min-height:160rpx;
+  line-height:160rpx;
+  width:100%;
+}
+.loginfont {
+  display: block;
+  height: 160rpx;
+  min-height:160rpx;
+  line-height:160rpx;
+  margin-right: 20rpx;
+  color: #999;
+}
+.createdDispatch {
+  margin-top:100px;
+  background:#3E85FF !important;
+  border-radius:25px;
+  width:90%;
+}
+.icon-yanjing {
+  color: #999;
+}
+.backGround {
+  height: 240px;
+  width: 100%;
+  background: #308bef;
+  position: relative;
+}
+.changanLogo {
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: 60px auto;
+}
+.title {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: 190px auto;
+  height: 40px;
+  text-align: center;
+}

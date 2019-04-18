@@ -1,0 +1,75 @@
+<view class="weui-tab__content">
+  <view class='noevent' wx:if="{{list.length<=0}}">当前无需要审核的单据</view>
+  <block wx:for="{{list}}" wx:key="{{index}}">
+    <view class="weui-form-preview">
+      <view class="numTitle">
+          <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">单据上报编号：{{item.billNum}}</view>
+              <view class="weui-form-preview__value_in-hd" style='font-size:12px;'>{{item.createTime}}</view>
+          </view>
+      </view>
+      <view class="weui-form-preview__bd">
+          <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">司机：{{item.driverName}}<text class='liceniseNum'>（{{item.truckNum}}）</text><text style="{{'background:'+item.color}}" class='wayStatus'>{{item.examineStatus}}</text></view>
+          </view>
+          <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">线路：{{item.routeName}}</view>
+          </view>
+          <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">类型：{{item.statusName}}</view>
+              <image wx:if="{{item.imgids}}" data-imgids="{{item.imgids}}" bindtap="handleOpen" src="../image/have_picture.png" class="logo"></image>
+          </view>
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">申请数量：{{item.unit === '元' ? item.money / 100 : item.money}}{{' '+item.unit}}</view>
+          </view>
+      </view>
+      <view class="weui-form-preview__bd" wx:if="{{item.examineUser}}" style="border-top: 1rpx solid #D9D9D9;">
+        <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">审批数量：{{item.unit === '元' ? item.examineMoney / 100 : item.examineMoney}}{{' '+item.unit}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">审核人员：{{item.examineUser}} （{{item.examineTime}}）</view>
+        </view>
+        <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">审核备注：{{item.remark?item.remark:''}}</view>
+        </view>
+      </view>
+
+      <view class="weui-form-preview__ft" wx:if="{{item.examineUser && waybillStatus === '待审核'}}">
+        <button hover-class="cancelClick" class="weui-btn mini-btn driverBtn" style="border-color:#ff9900;color:#ff9900" type="primary" plain="true" bindtap="backReport" data-id="{{item.id}}">回退审核</button>
+      </view>
+
+      <view class="weui-form-preview__ft" wx:if="{{!item.examineUser && waybillStatus === '待审核'}}">
+        <button hover-class="callClick" class="weui-btn mini-btn driverBtn" style="border-color:rgb(252, 101, 81);color:rgb(252, 101, 81)" type="primary" plain="true" bindtap="showM" data-examineStatus='3' data-id="{{item.id}}" data-unit="{{item.unit}}" data-money="{{item.money}}">拒绝申请</button>
+        <view><button hover-class="agreeClick" class="weui-btn mini-btn createdfull" style="border-color:rgb(20, 180, 177);color:rgb(20, 180, 177)" type="primary" plain="true" bindtap="showM" data-examineStatus='2' data-id="{{item.id}}" data-unit="{{item.unit}}"  data-money="{{item.money}}">同意申请</button>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  
+
+</view>
+
+<view class="mask" wx:if="{{showModal}}" catchtouchmove="ture"></view>
+<view class="modalDlg" wx:if="{{showModal}}" catchtouchmove="ture">
+<form bindsubmit="examine">
+<view class='mtitle'><text>单据审核-{{examineStatus==='3'?"驳回":"通过"}}</text><text class='iconfont icon-cc-close-circle close' bindtap='close'></text></view>
+  <view class='content'>  
+    <view style="padding-bottom: 0"><text>申请数量：</text><text>{{unit === '元' ? money / 100 : money}}{{' '+unit}}</text></view>
+    <view wx:if="{{examineStatus==='3'}}" class='exmoney' style="position:relative"><text>审批数量：</text><input disabled="true" style="border: 1px solid #ccc;width: 150px;padding-left: 3px;border:none" class="weui-input" placeholder-class="phcolor" value="{{examineMoney}}" name="examineMoney" placeholder="请输入审批数量"/><text class="bhUnit">{{' '+unit}}</text></view>      
+    <view wx:else class='exmoney'><text>审批数量：</text><input type="digit" style="border: 1px solid #ccc;width: 150px;padding-left: 3px" class="weui-input" placeholder-class="phcolor" value="{{examineMoney}}" name="examineMoney" placeholder="请输入审批数量"/>{{' '+unit}}</view>
+    <view style="padding-top:10rpx"><text>审批备注：</text>
+    <textarea fixed="true" show-confirm-bar="{{false}}" class="weui-textarea" placeholder-class="phcolor" value='{{remark}}' name="remark" placeholder="请输入审批备注" style="height: 180rpx;margin-top: 10px;box-sizing: border-box" />
+    </view>
+  </view>
+    <button hover-class="navigator-hover" disabled="{{disabled}}" class="weui-btn exmbtn {{examineStatus==='3'?'disagreeexm':''}}" type="primary" formType="submit">{{examineStatus==='3'?"驳回":"通过"}}</button>
+  </form>
+</view>
+    
+<i-modal show-cancel="{{false}}" show-ok="{{false}}" title="{{none}}" visible="{{visible}}" bind:ok="handleClose" bind:cancel="handleClose">
+    <view bindtap="closeMadol" class="delete"><image src="../image/delete.png"></image></view>
+    <view class="item_img" wx:for="{{imgList}}" wx:key="{{index}}"><image data-current="{{item}}" bindtap="imgTap" src="{{item}}"></image></view>
+</i-modal>
+
+
